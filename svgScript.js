@@ -1,11 +1,19 @@
 var slate = document.getElementById("vimage");
 slate.addEventListener("click",dot);
 var b = document.getElementById("clear");
+b.addEventListener("click",clearAll);
+
+function clearAll(e){
+    while(slate.lastChild){
+	slate.removeChild(slate.lastChild);
+    }
+    first=true;
+}
 
 //set values for current x and y to connect next circle
-//start w/ values of -1 to check if first dot or not
-var currX = -1;
-var currY = -1;
+var currX;
+var currY;
+var first=true;
 
 function dot(e){
     var circle = document.createElementNS("http://www.w3.org/2000/svg","circle");
@@ -16,7 +24,8 @@ function dot(e){
     circle.setAttribute("r", "10");
     circle.setAttribute("fill","black");
 
-    if(currX>-1 && currY>-1){
+    //always draw dots but if first not true, draw lines!
+    if(!first){
 	line.setAttribute("x1",currX);
 	line.setAttribute("y1",currY);
 	line.setAttribute("x2",e.offsetX);
@@ -28,4 +37,6 @@ function dot(e){
     currX=e.offsetX;
     currY=e.offsetY;
     slate.appendChild(circle);
+    first=false;
 }
+
