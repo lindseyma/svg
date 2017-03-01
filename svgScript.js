@@ -16,5 +16,16 @@ function dot(e){
     circle.setAttribute("r", "10");
     circle.setAttribute("fill","black");
 
+    if(currX>-1 && currY>-1){
+	line.setAttribute("x1",currX);
+	line.setAttribute("y1",currY);
+	line.setAttribute("x2",e.offsetX);
+	line.setAttribute("y2",e.offsetY);
+	line.setAttribute("stroke","black");
+	slate.appendChild(line);
+    }
+    //set new currX/Y vals
+    currX=e.offsetX;
+    currY=e.offsetY;
     slate.appendChild(circle);
 }
